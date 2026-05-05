@@ -2,7 +2,7 @@
 
     -- Day 1 SQL Practice
     
-    -- 1. Select * from Employee
+    -- 1. Select all columns from Employee
     SELECT * FROM Employee;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -72,6 +72,8 @@
     FROM Employee e
     JOIN Department d ON e.department_id = d.department_id
     WHERE d.name = 'IT';
+              (OR)
+    select name from Employee where department_id=1
 
 | name        |
 | ----------- |
@@ -190,6 +192,9 @@
     SELECT * 
     FROM Employee 
     WHERE hire_date < '2019-01-01';
+               (OR)
+    SELECT * FROM Employee WHERE YEAR(hire_date) < 2019;
+ 
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
 | ------ | ----------- | --- | ------- | ------------- | ---------- |
