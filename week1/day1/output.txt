@@ -2,7 +2,7 @@
 
     -- Day 1 SQL Practice
     
-    -- 1. Select all columns from Employee
+    -- 1. Select * from Employee
     SELECT * FROM Employee;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
