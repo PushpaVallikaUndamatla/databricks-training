@@ -1,18 +1,20 @@
-# Day 1 - SQL Basics
+# SQL Queries 1–25
 
 ## Description
-Practiced basic SQL queries using DB Fiddle.
+Practiced basic and intermediate SQL queries using DB Fiddle.
 
 ## Topics Covered
-- SELECT
-- WHERE
-- LIKE
+- SELECT statements
+- WHERE conditions
+- LIKE operator
 - Date filtering
+- Aggregate functions
+- GROUP BY and HAVING
 
-## Files in this folder
-- datacreation.sql → used to create tables and insert data
-- queries.sql → contains SQL queries (1–15)
-- output.txt → contains outputs of queries
+## Files
+- datacreation.sql → creates tables and inserts data
+- queries.sql → contains SQL queries (1–25)
+- output.txt → contains query outputs
 
 ## Learning Outcome
-Learned how to retrieve, filter, and search data in SQL.
+Learned how to retrieve, filter, group, and analyze data using SQL.
