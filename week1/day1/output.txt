@@ -1,8 +1,10 @@
 **Query #1**
 
-    -- Day 1 SQL Practice
+    -- =========================================
+    -- BASIC QUERIES (1–5)
+    -- =========================================
     
-    -- 1. Select all columns from Employee
+    -- 1. Select all columns from the Employee table
     SELECT * FROM Employee;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -21,7 +23,7 @@
 ---
 **Query #2**
 
-    -- 2. Select name and salary
+    -- 2. Select only the name and salary columns
     SELECT name, salary FROM Employee;
 
 | name        | salary  |
@@ -40,8 +42,9 @@
 ---
 **Query #3**
 
-    -- 3. Employees older than 30
-    SELECT * FROM Employee WHERE age > 30;
+    -- 3. Select employees older than 30
+    SELECT * FROM Employee
+    WHERE age > 30;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
 | ------ | ----------- | --- | ------- | ------------- | ---------- |
@@ -54,7 +57,7 @@
 ---
 **Query #4**
 
-    -- 4. Department names
+    -- 4. Select names of all departments
     SELECT name FROM Department;
 
 | name      |
@@ -67,25 +70,29 @@
 ---
 **Query #5**
 
-    -- 5. Employees in IT department
-    SELECT e.name
+    -- 5. Select employees who work in IT department
+    SELECT e.*
     FROM Employee e
-    JOIN Department d ON e.department_id = d.department_id
+    JOIN Department d
+    ON e.department_id = d.department_id
     WHERE d.name = 'IT';
-              (OR)
-    select name from Employee where department_id=1
 
-| name        |
-| ----------- |
-| John Doe    |
-| Bob Brown   |
-| Grace Kelly |
+| emp_id | name        | age | salary  | department_id | hire_date  |
+| ------ | ----------- | --- | ------- | ------------- | ---------- |
+| 1      | John Doe    | 28  | 50000.0 | 1             | 2020-01-15 |
+| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
+| 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
 
 ---
 **Query #6**
 
-    -- 6. Names starting with J
-    SELECT * FROM Employee WHERE name LIKE 'J%';
+    -- =========================================
+    -- STRING MATCHING QUERIES (6–10)
+    -- =========================================
+    
+    -- 6. Employees whose names start with 'J'
+    SELECT * FROM Employee
+    WHERE name LIKE 'J%';
 
 | emp_id | name       | age | salary  | department_id | hire_date  |
 | ------ | ---------- | --- | ------- | ------------- | ---------- |
@@ -95,13 +102,8 @@
 ---
 **Query #7**
 
-    -- ===============================
-    -- STRING MATCHING QUERIES (7–10)
-    -- ===============================
-    
     -- 7. Employees whose names end with 'e'
-    SELECT * 
-    FROM Employee 
+    SELECT * FROM Employee
     WHERE name LIKE '%e';
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -115,8 +117,7 @@
 **Query #8**
 
     -- 8. Employees whose names contain 'a'
-    SELECT * 
-    FROM Employee 
+    SELECT * FROM Employee
     WHERE name LIKE '%a%';
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -134,8 +135,7 @@
 **Query #9**
 
     -- 9. Employees whose names are exactly 9 characters long
-    SELECT * 
-    FROM Employee 
+    SELECT * FROM Employee
     WHERE LENGTH(name) = 9;
 
 | emp_id | name      | age | salary  | department_id | hire_date  |
@@ -146,9 +146,8 @@
 ---
 **Query #10**
 
-    -- 10. Employees whose names have 'o' as the second character
-    SELECT * 
-    FROM Employee 
+    -- 10. Employees whose names have 'o' as second character
+    SELECT * FROM Employee
     WHERE name LIKE '_o%';
 
 | emp_id | name      | age | salary  | department_id | hire_date  |
@@ -159,13 +158,12 @@
 ---
 **Query #11**
 
-    -- ===============================
+    -- =========================================
     -- DATE QUERIES (11–15)
-    -- ===============================
+    -- =========================================
     
-    -- 11. Employees hired in the year 2020
-    SELECT * 
-    FROM Employee 
+    -- 11. Employees hired in 2020
+    SELECT * FROM Employee
     WHERE YEAR(hire_date) = 2020;
 
 | emp_id | name       | age | salary  | department_id | hire_date  |
@@ -176,9 +174,8 @@
 ---
 **Query #12**
 
-    -- 12. Employees hired in January (any year)
-    SELECT * 
-    FROM Employee 
+    -- 12. Employees hired in January
+    SELECT * FROM Employee
     WHERE MONTH(hire_date) = 1;
 
 | emp_id | name     | age | salary  | department_id | hire_date  |
@@ -189,12 +186,8 @@
 **Query #13**
 
     -- 13. Employees hired before 2019
-    SELECT * 
-    FROM Employee 
+    SELECT * FROM Employee
     WHERE hire_date < '2019-01-01';
-               (OR)
-    SELECT * FROM Employee WHERE YEAR(hire_date) < 2019;
- 
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
 | ------ | ----------- | --- | ------- | ------------- | ---------- |
@@ -205,8 +198,7 @@
 **Query #14**
 
     -- 14. Employees hired on or after March 1, 2021
-    SELECT * 
-    FROM Employee 
+    SELECT * FROM Employee
     WHERE hire_date >= '2021-03-01';
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -219,22 +211,20 @@
 ---
 **Query #15**
 
-    -- 15. Employees hired in the last 2 years
-    SELECT * 
-    FROM Employee 
+    -- 15. Employees hired in last 2 years
+    SELECT * FROM Employee
     WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 2 YEAR);
 
 There are no results to be displayed.
 
 ---
-
 **Query #16**
 
-    -- ===============================
+    -- =========================================
     -- AGGREGATE QUERIES (16–20)
-    -- ===============================
+    -- =========================================
     
-    -- 16. Find the total salary of all employees
+    -- 16. Total salary of all employees
     SELECT SUM(salary) AS total_salary
     FROM Employee;
 
@@ -245,7 +235,7 @@ There are no results to be displayed.
 ---
 **Query #17**
 
-    -- 17. Find the average salary of employees
+    -- 17. Average salary of employees
     SELECT AVG(salary) AS average_salary
     FROM Employee;
 
@@ -256,7 +246,7 @@ There are no results to be displayed.
 ---
 **Query #18**
 
-    -- 18. Find the minimum salary
+    -- 18. Minimum salary in Employee table
     SELECT MIN(salary) AS minimum_salary
     FROM Employee;
 
@@ -267,7 +257,7 @@ There are no results to be displayed.
 ---
 **Query #19**
 
-    -- 19. Count the number of employees in each department
+    -- 19. Number of employees in each department
     SELECT department_id, COUNT(*) AS employee_count
     FROM Employee
     GROUP BY department_id;
@@ -283,7 +273,7 @@ There are no results to be displayed.
 ---
 **Query #20**
 
-    -- 20. Find the average salary in each department
+    -- 20. Average salary in each department
     SELECT department_id, AVG(salary) AS average_salary
     FROM Employee
     GROUP BY department_id;
@@ -299,11 +289,11 @@ There are no results to be displayed.
 ---
 **Query #21**
 
-    -- ===============================
+    -- =========================================
     -- GROUP BY QUERIES (21–25)
-    -- ===============================
+    -- =========================================
     
-    -- 21. Find total salary department-wise
+    -- 21. Total salary for each department
     SELECT department_id, SUM(salary) AS total_salary
     FROM Employee
     GROUP BY department_id;
@@ -319,7 +309,74 @@ There are no results to be displayed.
 ---
 **Query #22**
 
-    -- 22. Find departments having more than 2 employees
+    -- 22. Average age of employees in each department
+    SELECT department_id, AVG(age) AS average_age
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | average_age |
+| ------------- | ----------- |
+|               | 32.0        |
+| 1             | 33.3333     |
+| 2             | 31.5        |
+| 3             | 32.5        |
+| 4             | 34.0        |
+
+---
+**Query #23**
+
+    -- 23. Number of employees hired in each year
+    SELECT YEAR(hire_date) AS hire_year,
+           COUNT(*) AS employee_count
+    FROM Employee
+    GROUP BY YEAR(hire_date);
+
+| hire_year | employee_count |
+| --------- | -------------- |
+| 2018      | 2              |
+| 2019      | 2              |
+| 2020      | 2              |
+| 2021      | 3              |
+| 2022      | 1              |
+
+---
+**Query #24**
+
+    -- 24. Highest salary in each department
+    SELECT department_id, MAX(salary) AS highest_salary
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | highest_salary |
+| ------------- | -------------- |
+|               | 48000.0        |
+| 1             | 80000.0        |
+| 2             | 60000.0        |
+| 3             | 55000.0        |
+| 4             | 70000.0        |
+
+---
+**Query #25**
+
+    -- 25. Department with highest average salary
+    SELECT department_id, AVG(salary) AS average_salary
+    FROM Employee
+    GROUP BY department_id
+    ORDER BY average_salary DESC
+    LIMIT 1;
+
+| department_id | average_salary |
+| ------------- | -------------- |
+| 1             | 65000.0        |
+
+---
+**Query #26**
+
+    -- =========================================
+    -- HAVING QUERIES (26–30)
+    -- =========================================
+    
+    -- 26. Departments with more than 2 employees
     SELECT department_id, COUNT(*) AS employee_count
     FROM Employee
     GROUP BY department_id
@@ -330,41 +387,9 @@ There are no results to be displayed.
 | 1             | 3              |
 
 ---
-**Query #23**
+**Query #27**
 
-    -- 23. Find maximum salary in each department
-    SELECT department_id, MAX(salary) AS max_salary
-    FROM Employee
-    GROUP BY department_id;
-
-| department_id | max_salary |
-| ------------- | ---------- |
-|               | 48000.0    |
-| 1             | 80000.0    |
-| 2             | 60000.0    |
-| 3             | 55000.0    |
-| 4             | 70000.0    |
-
----
-**Query #24**
-
-    -- 24. Find minimum age in each department
-    SELECT department_id, MIN(age) AS minimum_age
-    FROM Employee
-    GROUP BY department_id;
-
-| department_id | minimum_age |
-| ------------- | ----------- |
-|               | 32          |
-| 1             | 27          |
-| 2             | 29          |
-| 3             | 25          |
-| 4             | 30          |
-
----
-**Query #25**
-
-    -- 25. Find departments with average salary greater than 55000
+    -- 27. Departments with average salary greater than 55000
     SELECT department_id, AVG(salary) AS average_salary
     FROM Employee
     GROUP BY department_id
@@ -376,17 +401,57 @@ There are no results to be displayed.
 | 4             | 61500.0        |
 
 ---
+**Query #28**
 
-
-**Query #26**
-
-    -- ===============================
-    -- ORDER BY QUERIES (26–30)
-    -- ===============================
-    
-    -- 26. Display employees ordered by salary in ascending order
-    SELECT *
+    -- 28. Years with more than 1 employee hired
+    SELECT YEAR(hire_date) AS hire_year,
+           COUNT(*) AS employee_count
     FROM Employee
+    GROUP BY YEAR(hire_date)
+    HAVING COUNT(*) > 1;
+
+| hire_year | employee_count |
+| --------- | -------------- |
+| 2018      | 2              |
+| 2019      | 2              |
+| 2020      | 2              |
+| 2021      | 3              |
+
+---
+**Query #29**
+
+    -- 29. Departments with total salary less than 100000
+    SELECT department_id, SUM(salary) AS total_salary
+    FROM Employee
+    GROUP BY department_id
+    HAVING SUM(salary) < 100000;
+
+| department_id | total_salary |
+| ------------- | ------------ |
+|               | 48000.0      |
+
+---
+**Query #30**
+
+    -- 30. Departments with maximum salary above 75000
+    SELECT department_id, MAX(salary) AS max_salary
+    FROM Employee
+    GROUP BY department_id
+    HAVING MAX(salary) > 75000;
+
+| department_id | max_salary |
+| ------------- | ---------- |
+| 1             | 80000.0    |
+
+---
+**Query #31**
+
+    -- =========================================
+    -- ORDER BY QUERIES (31–35)
+    -- =========================================
+    
+    -- 31. Employees ordered by salary ascending
+    SELECT * FROM Employee
     ORDER BY salary ASC;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -403,11 +468,10 @@ There are no results to be displayed.
 | 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
 
 ---
-**Query #27**
+**Query #32**
 
-    -- 27. Display employees ordered by age in descending order
-    SELECT *
-    FROM Employee
+    -- 32. Employees ordered by age descending
+    SELECT * FROM Employee
     ORDER BY age DESC;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -424,11 +488,10 @@ There are no results to be displayed.
 | 4      | Alice Blue  | 25  | 45000.0 | 3             | 2021-03-22 |
 
 ---
-**Query #28**
+**Query #33**
 
-    -- 28. Display employees ordered by hire date
-    SELECT *
-    FROM Employee
+    -- 33. Employees ordered by hire date ascending
+    SELECT * FROM Employee
     ORDER BY hire_date ASC;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -445,11 +508,10 @@ There are no results to be displayed.
 | 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
 
 ---
-**Query #29**
+**Query #34**
 
-    -- 29. Display employees ordered by department and salary
-    SELECT *
-    FROM Employee
+    -- 34. Employees ordered by department and salary
+    SELECT * FROM Employee
     ORDER BY department_id ASC, salary DESC;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
@@ -466,28 +528,31 @@ There are no results to be displayed.
 | 10     | Hannah Lee  | 30  | 53000.0 | 4             | 2020-02-25 |
 
 ---
-**Query #30**
+**Query #35**
 
-    -- 30. Display top 3 highest paid employees
-    SELECT *
+    -- 35. Departments ordered by total salary
+    SELECT department_id,
+           SUM(salary) AS total_salary
     FROM Employee
-    ORDER BY salary DESC
-    LIMIT 3;
+    GROUP BY department_id
+    ORDER BY total_salary DESC;
 
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
-| 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
-| 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
+| department_id | total_salary |
+| ------------- | ------------ |
+| 1             | 195000.0     |
+| 4             | 123000.0     |
+| 2             | 110000.0     |
+| 3             | 100000.0     |
+|               | 48000.0      |
 
 ---
-**Query #31**
+**Query #36**
 
-    -- ===============================
-    -- JOIN QUERIES (31–40)
-    -- ===============================
+    -- =========================================
+    -- JOIN QUERIES (36–45)
+    -- =========================================
     
-    -- 31. Display employee names with their department names
+    -- 36. Employee names with department names
     SELECT e.name AS employee_name,
            d.name AS department_name
     FROM Employee e
@@ -507,9 +572,30 @@ There are no results to be displayed.
 | Hannah Lee    | Marketing       |
 
 ---
-**Query #32**
+**Query #37**
 
-    -- 32. Display employees and their projects
+    -- 37. Project names with department names
+    SELECT p.name AS project_name,
+           d.name AS department_name
+    FROM Project p
+    JOIN Department d
+    ON p.department_id = d.department_id;
+
+| project_name    | department_name |
+| --------------- | --------------- |
+| Project Alpha   | IT              |
+| Project Gamma   | IT              |
+| Project Theta   | IT              |
+| Project Beta    | HR              |
+| Project Delta   | Finance         |
+| Project Eta     | Finance         |
+| Project Epsilon | Marketing       |
+| Project Zeta    | Marketing       |
+
+---
+**Query #38**
+
+    -- 38. Employee names and corresponding project names
     SELECT e.name AS employee_name,
            p.name AS project_name
     FROM Employee e
@@ -539,46 +625,9 @@ There are no results to be displayed.
 | Grace Kelly   | Project Theta   |
 
 ---
-**Query #33**
+**Query #39**
 
-    -- 33. Display employees working in IT department
-    SELECT e.*
-    FROM Employee e
-    JOIN Department d
-    ON e.department_id = d.department_id
-    WHERE d.name = 'IT';
-
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 1      | John Doe    | 28  | 50000.0 | 1             | 2020-01-15 |
-| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
-| 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
-
----
-**Query #34**
-
-    -- 34. Display departments with their projects
-    SELECT d.name AS department_name,
-           p.name AS project_name
-    FROM Department d
-    JOIN Project p
-    ON d.department_id = p.department_id;
-
-| department_name | project_name    |
-| --------------- | --------------- |
-| IT              | Project Alpha   |
-| IT              | Project Gamma   |
-| IT              | Project Theta   |
-| HR              | Project Beta    |
-| Finance         | Project Delta   |
-| Finance         | Project Eta     |
-| Marketing       | Project Epsilon |
-| Marketing       | Project Zeta    |
-
----
-**Query #35**
-
-    -- 35. Display all employees and their departments using LEFT JOIN
+    -- 39. All employees and departments including employees without department
     SELECT e.name AS employee_name,
            d.name AS department_name
     FROM Employee e
@@ -599,9 +648,9 @@ There are no results to be displayed.
 | Frank White   |                 |
 
 ---
-**Query #36**
+**Query #40**
 
-    -- 36. Display all departments even if they have no employees
+    -- 40. All departments and employees including departments without employees
     SELECT d.name AS department_name,
            e.name AS employee_name
     FROM Department d
@@ -621,87 +670,113 @@ There are no results to be displayed.
 | Marketing       | Hannah Lee    |
 
 ---
-**Query #37**
+**Query #41**
 
-    -- 37. Display employees without departments
-    SELECT *
-    FROM Employee
-    WHERE department_id IS NULL;
+    -- 41. Employees not assigned to any project
+    SELECT e.*
+    FROM Employee e
+    LEFT JOIN Project p
+    ON e.department_id = p.department_id
+    WHERE p.project_id IS NULL;
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
 | ------ | ----------- | --- | ------- | ------------- | ---------- |
 | 8      | Frank White | 32  | 48000.0 |               | 2021-07-10 |
 
 ---
-**Query #38**
+**Query #42**
 
-    -- 38. Display projects without departments
-    SELECT *
-    FROM Project
-    WHERE department_id IS NULL;
-
-| project_id | name         | department_id |
-| ---------- | ------------ | ------------- |
-| 9          | Project Iota |               |
-
----
-**Query #39**
-
-    -- 39. Display employee names and project names department-wise
-    SELECT e.name AS employee_name,
-           p.name AS project_name
+    -- 42. Employees and number of projects in their department
+    SELECT e.name,
+           COUNT(p.project_id) AS project_count
     FROM Employee e
-    JOIN Project p
-    ON e.department_id = p.department_id;
+    LEFT JOIN Project p
+    ON e.department_id = p.department_id
+    GROUP BY e.emp_id, e.name;
 
-| employee_name | project_name    |
-| ------------- | --------------- |
-| John Doe      | Project Alpha   |
-| Bob Brown     | Project Alpha   |
-| Grace Kelly   | Project Alpha   |
-| Jane Smith    | Project Beta    |
-| Charlie P.    | Project Beta    |
-| John Doe      | Project Gamma   |
-| Bob Brown     | Project Gamma   |
-| Grace Kelly   | Project Gamma   |
-| Alice Blue    | Project Delta   |
-| Eve Black     | Project Delta   |
-| David Green   | Project Epsilon |
-| Hannah Lee    | Project Epsilon |
-| David Green   | Project Zeta    |
-| Hannah Lee    | Project Zeta    |
-| Alice Blue    | Project Eta     |
-| Eve Black     | Project Eta     |
-| John Doe      | Project Theta   |
-| Bob Brown     | Project Theta   |
-| Grace Kelly   | Project Theta   |
+| name        | project_count |
+| ----------- | ------------- |
+| John Doe    | 3             |
+| Jane Smith  | 1             |
+| Bob Brown   | 3             |
+| Alice Blue  | 2             |
+| Charlie P.  | 1             |
+| David Green | 2             |
+| Eve Black   | 2             |
+| Frank White | 0             |
+| Grace Kelly | 3             |
+| Hannah Lee  | 2             |
 
 ---
-**Query #40**
+**Query #43**
 
-    -- 40. Count employees in each department with department names
-    SELECT d.name AS department_name,
-           COUNT(e.emp_id) AS employee_count
+    -- 43. Departments with no employees
+    SELECT d.*
     FROM Department d
     LEFT JOIN Employee e
     ON d.department_id = e.department_id
-    GROUP BY d.name;
+    WHERE e.emp_id IS NULL;
 
-| department_name | employee_count |
-| --------------- | -------------- |
-| Finance         | 2              |
-| HR              | 2              |
-| IT              | 3              |
-| Marketing       | 2              |
+There are no results to be displayed.
 
 ---
-**Query #41**
+**Query #44**
 
-    -- ===============================
-    -- SUBQUERY / NESTED QUERIES (41–50)
-    -- ===============================
+    -- 44. Employees sharing same department as John Doe
+    SELECT name
+    FROM Employee
+    WHERE department_id = (
+        SELECT department_id
+        FROM Employee
+        WHERE name = 'John Doe'
+    )
+    AND name <> 'John Doe';
+
+| name        |
+| ----------- |
+| Bob Brown   |
+| Grace Kelly |
+
+---
+**Query #45**
+
+    -- 45. Department name with highest average salary
+    SELECT d.name,
+           AVG(e.salary) AS average_salary
+    FROM Department d
+    JOIN Employee e
+    ON d.department_id = e.department_id
+    GROUP BY d.name
+    ORDER BY average_salary DESC
+    LIMIT 1;
+
+| name | average_salary |
+| ---- | -------------- |
+| IT   | 65000.0        |
+
+---
+**Query #46**
+
+    -- =========================================
+    -- NESTED & CORRELATED QUERIES (46–55)
+    -- =========================================
     
-    -- 41. Find employees earning more than average salary
+    -- 46. Employee with highest salary
+    SELECT *
+    FROM Employee
+    WHERE salary = (
+        SELECT MAX(salary)
+        FROM Employee
+    );
+
+| emp_id | name      | age | salary  | department_id | hire_date  |
+| ------ | --------- | --- | ------- | ------------- | ---------- |
+| 3      | Bob Brown | 45  | 80000.0 | 1             | 2018-02-12 |
+
+---
+**Query #47**
+
+    -- 47. Employees with salary above average salary
     SELECT *
     FROM Employee
     WHERE salary > (
@@ -717,73 +792,9 @@ There are no results to be displayed.
 | 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
 
 ---
-**Query #42**
+**Query #48**
 
-    -- 42. Find employees with maximum salary
-    SELECT *
-    FROM Employee
-    WHERE salary = (
-        SELECT MAX(salary)
-        FROM Employee
-    );
-
-| emp_id | name      | age | salary  | department_id | hire_date  |
-| ------ | --------- | --- | ------- | ------------- | ---------- |
-| 3      | Bob Brown | 45  | 80000.0 | 1             | 2018-02-12 |
-
----
-**Query #43**
-
-    -- 43. Find employees working in HR department
-    SELECT *
-    FROM Employee
-    WHERE department_id = (
-        SELECT department_id
-        FROM Department
-        WHERE name = 'HR'
-    );
-
-| emp_id | name       | age | salary  | department_id | hire_date  |
-| ------ | ---------- | --- | ------- | ------------- | ---------- |
-| 2      | Jane Smith | 34  | 60000.0 | 2             | 2019-07-23 |
-| 5      | Charlie P. | 29  | 50000.0 | 2             | 2019-12-01 |
-
----
-**Query #44**
-
-    -- 44. Find departments with no employees
-    SELECT *
-    FROM Department
-    WHERE department_id NOT IN (
-        SELECT department_id
-        FROM Employee
-        WHERE department_id IS NOT NULL
-    );
-
-There are no results to be displayed.
-
----
-**Query #45**
-
-    -- 45. Find employees hired before average hire date
-    SELECT *
-    FROM Employee
-    WHERE hire_date < (
-        SELECT AVG(hire_date)
-        FROM Employee
-    );
-
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 2      | Jane Smith  | 34  | 60000.0 | 2             | 2019-07-23 |
-| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
-| 5      | Charlie P.  | 29  | 50000.0 | 2             | 2019-12-01 |
-| 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
-
----
-**Query #46**
-
-    -- 46. Find second highest salary
+    -- 48. Second highest salary
     SELECT MAX(salary) AS second_highest_salary
     FROM Employee
     WHERE salary < (
@@ -796,103 +807,70 @@ There are no results to be displayed.
 | 70000.0               |
 
 ---
-**Query #47**
-
-    -- 47. Find employees having duplicate salaries
-    SELECT *
-    FROM Employee
-    WHERE salary IN (
-        SELECT salary
-        FROM Employee
-        GROUP BY salary
-        HAVING COUNT(*) > 1
-    );
-
-| emp_id | name       | age | salary  | department_id | hire_date  |
-| ------ | ---------- | --- | ------- | ------------- | ---------- |
-| 1      | John Doe   | 28  | 50000.0 | 1             | 2020-01-15 |
-| 5      | Charlie P. | 29  | 50000.0 | 2             | 2019-12-01 |
-
----
-**Query #48**
-
-    -- 48. Find employees in departments having more than 2 employees
-    SELECT *
-    FROM Employee
-    WHERE department_id IN (
-        SELECT department_id
-        FROM Employee
-        GROUP BY department_id
-        HAVING COUNT(*) > 2
-    );
-
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 1      | John Doe    | 28  | 50000.0 | 1             | 2020-01-15 |
-| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
-| 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
-
----
 **Query #49**
 
-    -- 49. Find highest salary in each department
+    -- 49. Department with most employees
     SELECT department_id,
-           MAX(salary) AS highest_salary
+           COUNT(*) AS employee_count
     FROM Employee
-    GROUP BY department_id;
+    GROUP BY department_id
+    ORDER BY employee_count DESC
+    LIMIT 1;
 
-| department_id | highest_salary |
+| department_id | employee_count |
 | ------------- | -------------- |
-|               | 48000.0        |
-| 1             | 80000.0        |
-| 2             | 60000.0        |
-| 3             | 55000.0        |
-| 4             | 70000.0        |
+| 1             | 3              |
 
 ---
 **Query #50**
 
-    -- 50. Find employees not assigned to any department
+    -- 50. Employees earning more than department average
     SELECT *
-    FROM Employee
-    WHERE department_id IS NULL;
-
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 8      | Frank White | 32  | 48000.0 |               | 2021-07-10 |
-
----
-**Query #51**
-
-    -- ===============================
-    -- ADVANCED QUERIES (51–65)
-    -- ===============================
-    
-    -- 51. Find duplicate salaries
-    SELECT salary,
-           COUNT(*) AS salary_count
-    FROM Employee
-    GROUP BY salary
-    HAVING COUNT(*) > 1;
-
-| salary  | salary_count |
-| ------- | ------------ |
-| 50000.0 | 2            |
-
----
-**Query #52**
-
-    -- 52. Find employees older than average age
-    SELECT *
-    FROM Employee
-    WHERE age > (
-        SELECT AVG(age)
+    FROM Employee e
+    WHERE salary > (
+        SELECT AVG(salary)
         FROM Employee
+        WHERE department_id = e.department_id
     );
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
 | ------ | ----------- | --- | ------- | ------------- | ---------- |
 | 2      | Jane Smith  | 34  | 60000.0 | 2             | 2019-07-23 |
+| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
+| 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
+| 7      | Eve Black   | 40  | 55000.0 | 3             | 2021-08-30 |
+
+---
+**Query #51**
+
+    -- 51. Third highest salary
+    SELECT DISTINCT salary
+    FROM Employee
+    ORDER BY salary DESC
+    LIMIT 1 OFFSET 2;
+
+| salary  |
+| ------- |
+| 65000.0 |
+
+---
+**Query #52**
+
+    -- 52. Employees older than all employees in HR department
+    SELECT *
+    FROM Employee
+    WHERE age > ALL (
+        SELECT age
+        FROM Employee
+        WHERE department_id = (
+            SELECT department_id
+            FROM Department
+            WHERE name = 'HR'
+        )
+    );
+
+| emp_id | name        | age | salary  | department_id | hire_date  |
+| ------ | ----------- | --- | ------- | ------------- | ---------- |
 | 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
 | 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
 | 7      | Eve Black   | 40  | 55000.0 | 3             | 2021-08-30 |
@@ -900,202 +878,224 @@ There are no results to be displayed.
 ---
 **Query #53**
 
-    -- 53. Find youngest employee
-    SELECT *
-    FROM Employee
-    WHERE age = (
-        SELECT MIN(age)
-        FROM Employee
-    );
-
-| emp_id | name       | age | salary  | department_id | hire_date  |
-| ------ | ---------- | --- | ------- | ------------- | ---------- |
-| 4      | Alice Blue | 25  | 45000.0 | 3             | 2021-03-22 |
-
----
-**Query #54**
-
-    -- 54. Find employees whose names start with 'A'
-    SELECT *
-    FROM Employee
-    WHERE name LIKE 'A%';
-
-| emp_id | name       | age | salary  | department_id | hire_date  |
-| ------ | ---------- | --- | ------- | ------------- | ---------- |
-| 4      | Alice Blue | 25  | 45000.0 | 3             | 2021-03-22 |
-
----
-**Query #55**
-
-    -- 55. Find employees whose names contain 'o'
-    SELECT *
-    FROM Employee
-    WHERE name LIKE '%o%';
-
-| emp_id | name      | age | salary  | department_id | hire_date  |
-| ------ | --------- | --- | ------- | ------------- | ---------- |
-| 1      | John Doe  | 28  | 50000.0 | 1             | 2020-01-15 |
-| 3      | Bob Brown | 45  | 80000.0 | 1             | 2018-02-12 |
-
----
-**Query #56**
-
-    -- 56. Find employees hired after 2020
-    SELECT *
-    FROM Employee
-    WHERE hire_date > '2020-12-31';
-
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 4      | Alice Blue  | 25  | 45000.0 | 3             | 2021-03-22 |
-| 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
-| 7      | Eve Black   | 40  | 55000.0 | 3             | 2021-08-30 |
-| 8      | Frank White | 32  | 48000.0 |               | 2021-07-10 |
-
----
-**Query #57**
-
-    -- 57. Find employees with salary between 50000 and 70000
-    SELECT *
-    FROM Employee
-    WHERE salary BETWEEN 50000 AND 70000;
-
-| emp_id | name        | age | salary  | department_id | hire_date  |
-| ------ | ----------- | --- | ------- | ------------- | ---------- |
-| 1      | John Doe    | 28  | 50000.0 | 1             | 2020-01-15 |
-| 2      | Jane Smith  | 34  | 60000.0 | 2             | 2019-07-23 |
-| 5      | Charlie P.  | 29  | 50000.0 | 2             | 2019-12-01 |
-| 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
-| 7      | Eve Black   | 40  | 55000.0 | 3             | 2021-08-30 |
-| 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
-| 10     | Hannah Lee  | 30  | 53000.0 | 4             | 2020-02-25 |
-
----
-**Query #58**
-
-    -- 58. Find departments having projects
-    SELECT DISTINCT d.name
-    FROM Department d
-    JOIN Project p
-    ON d.department_id = p.department_id;
-
-| name      |
-| --------- |
-| IT        |
-| HR        |
-| Finance   |
-| Marketing |
-
----
-**Query #59**
-
-    -- 59. Count projects in each department
-    SELECT department_id,
-           COUNT(*) AS project_count
-    FROM Project
-    GROUP BY department_id;
-
-| department_id | project_count |
-| ------------- | ------------- |
-|               | 1             |
-| 1             | 3             |
-| 2             | 1             |
-| 3             | 2             |
-| 4             | 2             |
-
----
-**Query #60**
-
-    -- 60. Find department with highest average salary
+    -- 53. Departments where average salary is greater than 55000
     SELECT department_id,
            AVG(salary) AS average_salary
     FROM Employee
     GROUP BY department_id
-    ORDER BY average_salary DESC
-    LIMIT 1;
+    HAVING AVG(salary) > 55000;
 
 | department_id | average_salary |
 | ------------- | -------------- |
 | 1             | 65000.0        |
+| 4             | 61500.0        |
 
 ---
-**Query #61**
+**Query #54**
 
-    -- 61. Find employee experience in years
-    SELECT name,
-           TIMESTAMPDIFF(YEAR, hire_date, CURDATE()) AS experience_years
-    FROM Employee;
-
-| name        | experience_years |
-| ----------- | ---------------- |
-| John Doe    | 6                |
-| Jane Smith  | 6                |
-| Bob Brown   | 8                |
-| Alice Blue  | 5                |
-| Charlie P.  | 6                |
-| David Green | 3                |
-| Eve Black   | 4                |
-| Frank White | 4                |
-| Grace Kelly | 7                |
-| Hannah Lee  | 6                |
-
----
-**Query #62**
-
-    -- 62. Find employees hired in the same year
-    SELECT e.*
-    FROM Employee e
-    JOIN (
-        SELECT YEAR(hire_date) AS hire_year
-        FROM Employee
-        GROUP BY YEAR(hire_date)
-        HAVING COUNT(*) > 1
-    ) y
-    ON YEAR(e.hire_date) = y.hire_year;
+    -- 54. Employees working in departments with at least 2 projects
+    SELECT *
+    FROM Employee
+    WHERE department_id IN (
+        SELECT department_id
+        FROM Project
+        GROUP BY department_id
+        HAVING COUNT(*) >= 2
+    );
 
 | emp_id | name        | age | salary  | department_id | hire_date  |
 | ------ | ----------- | --- | ------- | ------------- | ---------- |
 | 1      | John Doe    | 28  | 50000.0 | 1             | 2020-01-15 |
-| 2      | Jane Smith  | 34  | 60000.0 | 2             | 2019-07-23 |
 | 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
 | 4      | Alice Blue  | 25  | 45000.0 | 3             | 2021-03-22 |
-| 5      | Charlie P.  | 29  | 50000.0 | 2             | 2019-12-01 |
+| 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
 | 7      | Eve Black   | 40  | 55000.0 | 3             | 2021-08-30 |
-| 8      | Frank White | 32  | 48000.0 |               | 2021-07-10 |
 | 9      | Grace Kelly | 27  | 65000.0 | 1             | 2018-11-13 |
 | 10     | Hannah Lee  | 30  | 53000.0 | 4             | 2020-02-25 |
 
 ---
+**Query #55**
+
+    -- 55. Employees hired on same date as Jane Smith
+    SELECT *
+    FROM Employee
+    WHERE hire_date = (
+        SELECT hire_date
+        FROM Employee
+        WHERE name = 'Jane Smith'
+    )
+    AND name <> 'Jane Smith';
+
+There are no results to be displayed.
+
+---
+**Query #56**
+
+    -- =========================================
+    -- COMBINED MODERATE DIFFICULTY QUERIES (56–65)
+    -- =========================================
+    
+    -- 56. Total salary of employees hired in 2020
+    SELECT SUM(salary) AS total_salary
+    FROM Employee
+    WHERE YEAR(hire_date) = 2020;
+
+| total_salary |
+| ------------ |
+| 103000.0     |
+
+---
+**Query #57**
+
+    -- 57. Average salary in each department ordered descending
+    SELECT department_id,
+           AVG(salary) AS average_salary
+    FROM Employee
+    GROUP BY department_id
+    ORDER BY average_salary DESC;
+
+| department_id | average_salary |
+| ------------- | -------------- |
+| 1             | 65000.0        |
+| 4             | 61500.0        |
+| 2             | 55000.0        |
+| 3             | 50000.0        |
+|               | 48000.0        |
+
+---
+**Query #58**
+
+    -- 58. Departments with more than 1 employee and average salary > 55000
+    SELECT department_id,
+           COUNT(*) AS employee_count,
+           AVG(salary) AS average_salary
+    FROM Employee
+    GROUP BY department_id
+    HAVING COUNT(*) > 1
+    AND AVG(salary) > 55000;
+
+| department_id | employee_count | average_salary |
+| ------------- | -------------- | -------------- |
+| 1             | 3              | 65000.0        |
+| 4             | 2              | 61500.0        |
+
+---
+**Query #59**
+
+    -- 59. Employees hired in last 2 years ordered by hire date
+    SELECT *
+    FROM Employee
+    WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 2 YEAR)
+    ORDER BY hire_date ASC;
+
+There are no results to be displayed.
+
+---
+**Query #60**
+
+    -- 60. Total employees and average salary for departments with >2 employees
+    SELECT department_id,
+           COUNT(*) AS employee_count,
+           AVG(salary) AS average_salary
+    FROM Employee
+    GROUP BY department_id
+    HAVING COUNT(*) > 2;
+
+| department_id | employee_count | average_salary |
+| ------------- | -------------- | -------------- |
+| 1             | 3              | 65000.0        |
+
+---
+**Query #61**
+
+    -- 61. Employees whose salary is above department average
+    SELECT name, salary
+    FROM Employee e
+    WHERE salary > (
+        SELECT AVG(salary)
+        FROM Employee
+        WHERE department_id = e.department_id
+    );
+
+| name        | salary  |
+| ----------- | ------- |
+| Jane Smith  | 60000.0 |
+| Bob Brown   | 80000.0 |
+| David Green | 70000.0 |
+| Eve Black   | 55000.0 |
+
+---
+**Query #62**
+
+    -- 62. Employees hired on same date as oldest employee
+    SELECT name
+    FROM Employee
+    WHERE hire_date = (
+        SELECT MIN(hire_date)
+        FROM Employee
+    );
+
+| name      |
+| --------- |
+| Bob Brown |
+
+---
 **Query #63**
 
-    -- 63. Find total number of employees
-    SELECT COUNT(*) AS total_employees
-    FROM Employee;
+    -- 63. Department names with total number of projects
+    SELECT d.name,
+           COUNT(p.project_id) AS total_projects
+    FROM Department d
+    LEFT JOIN Project p
+    ON d.department_id = p.department_id
+    GROUP BY d.name
+    ORDER BY total_projects DESC;
 
-| total_employees |
-| --------------- |
-| 10              |
+| name      | total_projects |
+| --------- | -------------- |
+| IT        | 3              |
+| Finance   | 2              |
+| Marketing | 2              |
+| HR        | 1              |
 
 ---
 **Query #64**
 
-    -- 64. Find total number of departments
-    SELECT COUNT(*) AS total_departments
-    FROM Department;
+    -- 64. Employee with highest salary in each department
+    SELECT e.*
+    FROM Employee e
+    WHERE salary = (
+        SELECT MAX(salary)
+        FROM Employee
+        WHERE department_id = e.department_id
+    );
 
-| total_departments |
-| ----------------- |
-| 4                 |
+| emp_id | name        | age | salary  | department_id | hire_date  |
+| ------ | ----------- | --- | ------- | ------------- | ---------- |
+| 2      | Jane Smith  | 34  | 60000.0 | 2             | 2019-07-23 |
+| 3      | Bob Brown   | 45  | 80000.0 | 1             | 2018-02-12 |
+| 6      | David Green | 38  | 70000.0 | 4             | 2022-05-18 |
+| 7      | Eve Black   | 40  | 55000.0 | 3             | 2021-08-30 |
 
 ---
 **Query #65**
 
-    -- 65. Find total number of projects
-    SELECT COUNT(*) AS total_projects
-    FROM Project;
+    -- 65. Employees older than department average age
+    SELECT name, salary
+    FROM Employee e
+    WHERE age > (
+        SELECT AVG(age)
+        FROM Employee
+        WHERE department_id = e.department_id
+    );
 
-| total_projects |
-| -------------- |
-| 9              |
+| name        | salary  |
+| ----------- | ------- |
+| Jane Smith  | 60000.0 |
+| Bob Brown   | 80000.0 |
+| David Green | 70000.0 |
+| Eve Black   | 55000.0 |
 
 ---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
