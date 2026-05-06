@@ -74,3 +74,57 @@ WHERE hire_date >= '2021-03-01';
 SELECT * 
 FROM Employee 
 WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 2 YEAR);
+
+
+-- 16. Find the total salary of all employees
+SELECT SUM(salary) AS total_salary
+FROM Employee;
+
+-- 17. Find the average salary of employees
+SELECT AVG(salary) AS average_salary
+FROM Employee;
+
+-- 18. Find the minimum salary
+SELECT MIN(salary) AS minimum_salary
+FROM Employee;
+
+-- 19. Count the number of employees in each department
+SELECT department_id, COUNT(*) AS employee_count
+FROM Employee
+GROUP BY department_id;
+
+-- 20. Find the average salary in each department
+SELECT department_id, AVG(salary) AS average_salary
+FROM Employee
+GROUP BY department_id;
+
+-- ===============================
+-- GROUP BY QUERIES (21–25)
+-- ===============================
+
+-- 21. Find total salary department-wise
+SELECT department_id, SUM(salary) AS total_salary
+FROM Employee
+GROUP BY department_id;
+
+-- 22. Find departments having more than 2 employees
+SELECT department_id, COUNT(*) AS employee_count
+FROM Employee
+GROUP BY department_id
+HAVING COUNT(*) > 2;
+
+-- 23. Find maximum salary in each department
+SELECT department_id, MAX(salary) AS max_salary
+FROM Employee
+GROUP BY department_id;
+
+-- 24. Find minimum age in each department
+SELECT department_id, MIN(age) AS minimum_age
+FROM Employee
+GROUP BY department_id;
+
+-- 25. Find departments with average salary greater than 55000
+SELECT department_id, AVG(salary) AS average_salary
+FROM Employee
+GROUP BY department_id
+HAVING AVG(salary) > 55000;
