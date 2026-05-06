@@ -228,4 +228,151 @@ There are no results to be displayed.
 
 ---
 
-[View on DB Fiddle](https://www.db-fiddle.com/)
+**Query #16**
+
+    -- ===============================
+    -- AGGREGATE QUERIES (16–20)
+    -- ===============================
+    
+    -- 16. Find the total salary of all employees
+    SELECT SUM(salary) AS total_salary
+    FROM Employee;
+
+| total_salary |
+| ------------ |
+| 576000.0     |
+
+---
+**Query #17**
+
+    -- 17. Find the average salary of employees
+    SELECT AVG(salary) AS average_salary
+    FROM Employee;
+
+| average_salary |
+| -------------- |
+| 57600.0        |
+
+---
+**Query #18**
+
+    -- 18. Find the minimum salary
+    SELECT MIN(salary) AS minimum_salary
+    FROM Employee;
+
+| minimum_salary |
+| -------------- |
+| 45000.0        |
+
+---
+**Query #19**
+
+    -- 19. Count the number of employees in each department
+    SELECT department_id, COUNT(*) AS employee_count
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | employee_count |
+| ------------- | -------------- |
+|               | 1              |
+| 1             | 3              |
+| 2             | 2              |
+| 3             | 2              |
+| 4             | 2              |
+
+---
+**Query #20**
+
+    -- 20. Find the average salary in each department
+    SELECT department_id, AVG(salary) AS average_salary
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | average_salary |
+| ------------- | -------------- |
+|               | 48000.0        |
+| 1             | 65000.0        |
+| 2             | 55000.0        |
+| 3             | 50000.0        |
+| 4             | 61500.0        |
+
+---
+**Query #21**
+
+    -- ===============================
+    -- GROUP BY QUERIES (21–25)
+    -- ===============================
+    
+    -- 21. Find total salary department-wise
+    SELECT department_id, SUM(salary) AS total_salary
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | total_salary |
+| ------------- | ------------ |
+|               | 48000.0      |
+| 1             | 195000.0     |
+| 2             | 110000.0     |
+| 3             | 100000.0     |
+| 4             | 123000.0     |
+
+---
+**Query #22**
+
+    -- 22. Find departments having more than 2 employees
+    SELECT department_id, COUNT(*) AS employee_count
+    FROM Employee
+    GROUP BY department_id
+    HAVING COUNT(*) > 2;
+
+| department_id | employee_count |
+| ------------- | -------------- |
+| 1             | 3              |
+
+---
+**Query #23**
+
+    -- 23. Find maximum salary in each department
+    SELECT department_id, MAX(salary) AS max_salary
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | max_salary |
+| ------------- | ---------- |
+|               | 48000.0    |
+| 1             | 80000.0    |
+| 2             | 60000.0    |
+| 3             | 55000.0    |
+| 4             | 70000.0    |
+
+---
+**Query #24**
+
+    -- 24. Find minimum age in each department
+    SELECT department_id, MIN(age) AS minimum_age
+    FROM Employee
+    GROUP BY department_id;
+
+| department_id | minimum_age |
+| ------------- | ----------- |
+|               | 32          |
+| 1             | 27          |
+| 2             | 29          |
+| 3             | 25          |
+| 4             | 30          |
+
+---
+**Query #25**
+
+    -- 25. Find departments with average salary greater than 55000
+    SELECT department_id, AVG(salary) AS average_salary
+    FROM Employee
+    GROUP BY department_id
+    HAVING AVG(salary) > 55000;
+
+| department_id | average_salary |
+| ------------- | -------------- |
+| 1             | 65000.0        |
+| 4             | 61500.0        |
+
+---
